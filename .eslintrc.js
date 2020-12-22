@@ -2,9 +2,11 @@ module.exports = {
     extends: 'erb',
     rules: {
         // A temporary hack related to IDE not resolving correct package.json
+        'class-methods-use-this': 'off',
         'import/no-extraneous-dependencies': 'off',
         'react/no-unused-prop-types': 'warn',
         'react/static-property-placement': 'off',
+        'react/prefer-stateless-function': 'warn',
     },
     parserOptions: {
         ecmaVersion: 2020,
