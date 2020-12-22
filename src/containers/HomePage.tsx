@@ -2,16 +2,19 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Home from '../components/Home';
-import CounterActions from '../actions/counter';
+import IntegrationActions from '../actions/integrations';
 
 function mapStateToProps(state, ownProps) {
+    console.log(state);
     return {
         dataStore: ownProps.dataStore,
+        integrationManager: state.integrations.manager,
+        initialized: state.integrations.initialized,
     };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
-    return bindActionCreators(CounterActions, dispatch);
+    return bindActionCreators({ ...IntegrationActions }, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

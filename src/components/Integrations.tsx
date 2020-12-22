@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import DataStore from 'app/classes/DataStore';
+import IntigrationManager from '../integrations/IntegrationManager';
 
 interface IProps {
     dataStore: DataStore;
+    integrationManager: IntigrationManager;
 }
 
-export default class Integrations extends Component<IProps> {
+export default class Integrations extends PureComponent<IProps> {
     props: IProps;
 
     // constructor(props) {

@@ -7,12 +7,18 @@ import DataStore from 'app/classes/DataStore';
 import Launcher from './Launcher';
 import Integrations from './Integrations';
 import Settings from './Settings';
+import IntegrationManager from '../integrations/IntegrationManager';
+// import { initialize } from '../actions/integrations';
 // import routes from '../constants/routes';
 
 const { TabPane } = Tabs;
 
 interface IProps extends RouteComponentProps<any> {
     dataStore: DataStore;
+    // integrations props
+    integrationManager: IntegrationManager;
+    initialized: boolean;
+    initialize: () => void;
 }
 
 export default class Home extends Component<IProps> {
@@ -20,6 +26,13 @@ export default class Home extends Component<IProps> {
 
     constructor(props, history) {
         super(props);
+        console.log(props);
+        const { initialized, initialize } = props;
+
+        if (!initialized) {
+            console.log('Initializing integrations...');
+            initialize();
+        }
     }
 
     toPage(route: string, e) {
@@ -28,7 +41,7 @@ export default class Home extends Component<IProps> {
     }
 
     render() {
-        const { dataStore } = this.props;
+        const { dataStore, intigrationManager } = this.props;
         // if (this.state.toHome) {
         //     return <Redirect to="/home" />;
         // }
@@ -39,7 +52,10 @@ export default class Home extends Component<IProps> {
                         <Launcher dataStore={dataStore} />
                     </TabPane>
                     <TabPane tab="Integration" key="integration">
-                        <Integrations dataStore={dataStore} />
+                        <Integrations
+                            dataStore={dataStore}
+                            integrationManager={intigrationManager}
+                        />
                     </TabPane>
                     <TabPane tab="Settings" key="settings">
                         <Settings dataStore={dataStore} />
