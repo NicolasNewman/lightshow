@@ -1,11 +1,11 @@
 // import Integration from './Integration';
 import Logitech from './Logitech';
-import { IntegrationName, Integration } from './Integration';
+import { IntegrationName, Integration } from './AbstractIntegration';
 
 export default class IntegrationManager {
     integrations: Integration[];
 
-    activeIntegrations: { [value: IntegrationName]: Integration };
+    private activeIntegrations: { [value: IntegrationName]: Integration };
 
     constructor() {
         this.integrations = [];
@@ -25,6 +25,12 @@ export default class IntegrationManager {
                 }
             }
         });
+    }
+
+    getActiveIntigrations(): {
+        [value: IntegrationName]: Integration;
+    } {
+        return this.activeIntegrations;
     }
 
     setColor(r: number, g: number, b: number) {

@@ -8,6 +8,7 @@ import Launcher from './Launcher';
 import Integrations from './Integrations';
 import Settings from './Settings';
 import IntegrationManager from '../integrations/IntegrationManager';
+import { Integration } from '../integrations/AbstractIntegration';
 // import { initialize } from '../actions/integrations';
 // import routes from '../constants/routes';
 
@@ -17,6 +18,7 @@ interface IProps extends RouteComponentProps<any> {
     dataStore: DataStore;
     // integrations props
     integrationManager: IntegrationManager;
+    activeIntegrations: Integration[];
     initialized: boolean;
     initialize: () => void;
 }
@@ -41,7 +43,11 @@ export default class Home extends Component<IProps> {
     }
 
     render() {
-        const { dataStore, intigrationManager } = this.props;
+        const {
+            dataStore,
+            intigrationManager,
+            activeIntegrations,
+        } = this.props;
         // if (this.state.toHome) {
         //     return <Redirect to="/home" />;
         // }
@@ -55,6 +61,7 @@ export default class Home extends Component<IProps> {
                         <Integrations
                             dataStore={dataStore}
                             integrationManager={intigrationManager}
+                            activeIntegrations={activeIntegrations}
                         />
                     </TabPane>
                     <TabPane tab="Settings" key="settings">

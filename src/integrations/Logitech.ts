@@ -1,5 +1,5 @@
 import LogitechSDK from 'logitech-led';
-import { Integration } from './Integration';
+import { Integration } from './AbstractIntegration';
 
 export default class Logitech extends Integration {
     constructor() {

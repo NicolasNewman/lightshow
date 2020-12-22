@@ -9,6 +9,7 @@ function mapStateToProps(state, ownProps) {
     return {
         dataStore: ownProps.dataStore,
         integrationManager: state.integrations.manager,
+        activeIntegrations: state.integrations.activeIntegrations,
         initialized: state.integrations.initialized,
     };
 }
