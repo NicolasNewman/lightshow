@@ -1,7 +1,7 @@
 const sizes = {
     homeWindow: {
-        width: 350,
-        height: 500,
+        width: 800,
+        height: 600,
     },
 };
 
