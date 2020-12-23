@@ -8,9 +8,12 @@ import HomePage from './containers/HomePage';
 import DataStore from './classes/DataStore';
 import IpcInterface from './classes/IpcInterface';
 import sizes from './constants/sizes';
+import LightSync from './classes/LightSync';
 
 export default class Routes extends Component {
     private dataStore: DataStore = new DataStore();
+
+    private lightsync: LightSync = new LightSync();
 
     render() {
         return (
@@ -23,7 +26,12 @@ export default class Routes extends Component {
                                 sizes.homeWindow.width,
                                 sizes.homeWindow.height
                             );
-                            return <HomePage dataStore={this.dataStore} />;
+                            return (
+                                <HomePage
+                                    dataStore={this.dataStore}
+                                    lightsync={this.lightsync}
+                                />
+                            );
                         }}
                     />
                     <Redirect from="/" to="/home" />
