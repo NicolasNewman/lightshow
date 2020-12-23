@@ -35,8 +35,16 @@ export default class LightSync {
             this.isRunning = true;
 
             this.lightsync.stdout.on('data', (data) => {
-                console.log(`[light-sync] Received data: ${data.toString()}`);
-                this.color = JSON.parse(data.toString());
+                try {
+                    const color = JSON.parse(data.toString());
+                    this.color = color;
+                    console.log(
+                        `%c[light-sync] Received data: ${data.toString()}`,
+                        `background: rgb(${color.r},${color.g},${color.b}); color: #fff`
+                    );
+                } catch (e) {
+                    console.log(data.toString());
+                }
             });
 
             this.lightsync.stdout.on('close', (code) => {
@@ -52,8 +60,6 @@ export default class LightSync {
 
     stop() {
         if (this.isRunning && this.lightsync) {
-            // console.log('kill');
-            // this.lightsync.kill('SIGINT');
             kill(this.lightsync.pid);
             this.isRunning = false;
         }
