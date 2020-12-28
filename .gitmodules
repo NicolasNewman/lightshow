@@ -1,0 +1,3 @@
+[submodule "light-sync"]
+	path = light-sync
+	url = https://github.com/NicolasNewman/light-sync.git
