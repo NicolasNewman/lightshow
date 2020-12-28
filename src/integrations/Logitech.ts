@@ -16,6 +16,11 @@ export default class Logitech extends Integration {
     }
 
     setColor(r: number, g: numberm, b: number) {
-        return LogitechSDK.LogiLedSetLighting(shift(r), shift(g), shift(b));
+        console.log(`Setting color to ${this.shift(r)}`);
+        return LogitechSDK.LogiLedSetLighting(
+            this.shift(r),
+            this.shift(g),
+            this.shift(b)
+        );
     }
 }

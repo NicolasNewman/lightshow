@@ -26,8 +26,8 @@ interface IProps extends RouteComponentProps<any> {
     // lightsync props
     lightSyncRunning: boolean;
     lightSyncArgs: string[];
-    start: () => void;
-    stop: () => void;
+    start: (lightsync: LightSync) => void;
+    stop: (lightsync: LightSync) => void;
     setArgs: (args: string[]) => void;
 }
 
@@ -36,11 +36,19 @@ export default class Home extends Component<IProps> {
 
     constructor(props, history) {
         super(props);
-        const { initialized, initialize } = props;
+    }
 
+    componentDidMount() {
+        const {
+            initialized,
+            initialize,
+            lightsync,
+            integrationManager,
+        } = this.props;
         if (!initialized) {
             console.log('Initializing integrations...');
             initialize();
+            lightsync.connectSetColor(integrationManager.setColor);
         }
     }
 

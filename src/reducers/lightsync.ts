@@ -7,7 +7,7 @@ export interface IInitialState {
 
 const initialState: IInitialState = {
     running: false,
-    args: [],
+    args: ['-vis', 'true'],
 };
 
 export default function integration(
@@ -16,11 +16,13 @@ export default function integration(
 ) {
     switch (action.type) {
         case LightSyncTypeKeys.START:
+            action.lightsync.start(state.args);
             return {
                 running: true,
                 args: state.args,
             };
         case LightSyncTypeKeys.STOP:
+            action.lightsync.stop();
             return {
                 running: false,
                 args: state.args,

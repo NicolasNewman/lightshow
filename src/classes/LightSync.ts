@@ -9,6 +9,8 @@ export default class LightSync {
 
     private color: { r: number; g: number; b: number; brightness: number };
 
+    private setColor: (r: number, g: number, b: number) => void | null;
+
     private isRunning: boolean;
 
     constructor() {
@@ -24,6 +26,7 @@ export default class LightSync {
             );
         }
         this.isRunning = false;
+        this.setColor = null;
     }
 
     start(args: string[]) {
@@ -42,7 +45,11 @@ export default class LightSync {
                         `%c[light-sync] Received data: ${data.toString()}`,
                         `background: rgb(${color.r},${color.g},${color.b}); color: #fff`
                     );
+                    if (this.setColor) {
+                        this.setColor(color.r, color.g, color.b);
+                    }
                 } catch (e) {
+                    console.log(e);
                     console.log(data.toString());
                 }
             });
@@ -63,6 +70,10 @@ export default class LightSync {
             kill(this.lightsync.pid);
             this.isRunning = false;
         }
+    }
+
+    connectSetColor(func: (r: number, g: number, b: number) => void) {
+        this.setColor = func;
     }
 
     getColor() {

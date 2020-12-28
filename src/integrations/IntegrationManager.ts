@@ -1,5 +1,6 @@
 // import Integration from './Integration';
 import Logitech from './Logitech';
+import Corsair from './Corsair';
 import { IntegrationName, Integration } from './AbstractIntegration';
 
 export default class IntegrationManager {
@@ -7,10 +8,15 @@ export default class IntegrationManager {
 
     private activeIntegrations: { [value: IntegrationName]: Integration };
 
+    private activeIntegrationKeys: IntegrationName;
+
+    private activeIntegrationValues: Integration[];
+
     constructor() {
         this.integrations = [];
         this.activeIntegrations = {};
         this.integrations.push(new Logitech());
+        this.integrations.push(new Corsair());
     }
 
     activate() {
@@ -21,10 +27,18 @@ export default class IntegrationManager {
                     `[${integration.name}] is ${res ? 'active' : 'inactive'}`
                 );
                 if (res) {
+                    console.log(this.activeIntegrations);
                     this.activeIntegrations[integration.name] = integration;
+                    console.log(this.activeIntegrations);
                 }
             }
         });
+        this.activeIntegrationKeys = Object.keys(
+            this.activeIntegrations
+        ) as IntegrationName;
+        this.activeIntegrationValues = Object.values(
+            this.activeIntegrations
+        ) as Integration[];
     }
 
     getActiveIntigrations(): {
@@ -33,9 +47,14 @@ export default class IntegrationManager {
         return this.activeIntegrations;
     }
 
-    setColor(r: number, g: number, b: number) {
-        this.integrations.forEach((integration) => {
-            integration.setColor(r, g, b);
+    setColor = (r: number, g: number, b: number) => {
+        console.log('Setting color');
+        console.log(this.activeIntegrations);
+        this.activeIntegrationValues.forEach((integration) => {
+            console.log(integration);
+            console.log(integration.setColor);
+            const result = integration.setColor(r, g, b);
+            console.log(result);
         });
-    }
+    };
 }

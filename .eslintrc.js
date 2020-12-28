@@ -7,6 +7,7 @@ module.exports = {
         'react/no-unused-prop-types': 'warn',
         'react/static-property-placement': 'off',
         'react/prefer-stateless-function': 'warn',
+        'no-plusplus': 'off',
     },
     parserOptions: {
         ecmaVersion: 2020,

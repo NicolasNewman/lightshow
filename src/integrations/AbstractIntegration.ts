@@ -3,7 +3,7 @@ export type IntegrationName = 'LOGITECH' | 'HUE' | 'CORSAIR';
 export abstract class Integration {
     enabled: boolean;
 
-    name: string;
+    name: IntegrationName;
 
     automatic: boolean;
 
@@ -15,5 +15,5 @@ export abstract class Integration {
 
     abstract init(): boolean;
 
-    abstract setColor(r: number, g: number, b: number);
+    abstract setColor(r: number, g: number, b: number): boolean;
 }

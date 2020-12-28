@@ -10,8 +10,8 @@ interface IProps {
     lightsync: LightSync;
     lightSyncRunning: boolean;
     lightSyncArgs: string[];
-    start: () => void;
-    stop: () => void;
+    start: (lightsync: LightSync) => void;
+    stop: (lightsync: LightSync) => void;
 }
 
 export default class Launcher extends Component<IProps> {
@@ -35,11 +35,11 @@ export default class Launcher extends Component<IProps> {
                     type="primary"
                     onClick={() => {
                         if (!lightSyncRunning) {
-                            lightsync.start(['-vis', 'true']);
-                            start();
+                            // lightsync.start(['-vis', 'true']);
+                            start(lightsync);
                         } else {
-                            lightsync.stop();
-                            stop();
+                            // lightsync.stop();
+                            stop(lightsync);
                         }
                     }}
                     style={
