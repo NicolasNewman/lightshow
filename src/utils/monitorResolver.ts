@@ -2,10 +2,13 @@ import * as path from 'path';
 import { spawn, exec, ChildProcessWithoutNullStreams } from 'child_process';
 import kill from 'tree-kill';
 
-export default function getMonitors() {
-    console.log('here1');
+export default function getMonitors(): Promise<string[]> {
     return new Promise((resolve, reject) => {
-        console.log('here2');
+        const timeout = (pid) => {
+            kill(pid);
+            reject(new Error('Error: monitorResolver has timed out'));
+        };
+
         if (process.env.NODE_ENV === 'production') {
             path = path.join(process.resourcesPath, 'light-sync/');
         } else {
@@ -17,32 +20,47 @@ export default function getMonitors() {
                 'light_sync.exe'
             );
         }
-        const lightsync = spawn(path, ['--screens', 'true'], {
-            shell: false,
-            detached: false,
-        });
+
+        const lightsync: ChildProcessWithoutNullStreams = spawn(
+            path,
+            ['--screens', 'true'],
+            {
+                shell: false,
+                detached: false,
+            }
+        );
 
         lightsync.stdout.on('data', (data) => {
             try {
                 let str: string = data.toString();
-                console.log(str);
-                if (str.contains('[')) {
-                    // str = str.replace(/^[^\[]*/, '');
-                    str = str.replace(/\t|\[|\]|\n/, '');
-                    console.log(str);
+                if (str.includes('[')) {
+                    str = str
+                        .replaceAll('\n', '')
+                        .replaceAll('\t', '')
+                        .replace(/(^[^[]*)/, '') // replace everything before the start of the array
+                        // .replaceAll(/[0-9]: /g, '') // replace the index indicator for each element
+                        .replaceAll('[', '')
+                        .replaceAll(']', '')
+                        .replaceAll(/,(?! )/g, ''); // replace trailing comma
+                    const split = str.split(/,(?= )(?! ') /); // split by commas that seperate array elements, not object fields
+                    kill(lightsync.pid);
+                    console.log(split);
+                    resolve(split);
                 }
             } catch (e) {
-                reject(new Error('Error fetching screens'));
+                reject(new Error(`Error fetching screens: ${e}`));
             }
         });
 
-        lightsync.stdout.on('close', (code) => {
-            console.log(`[screen-resolver] closed with code ${code}`);
-            resolve('success');
-        });
+        // lightsync.stdout.on('close', (code) => {
+        //     console.log(`[screen-resolver] closed with code ${code}`);
+        //     resolve('success');
+        // });
 
         lightsync.stderr.on('data', (data) => {
-            console.error(data.toString());
+            reject(new Error(data.toString()));
         });
+
+        setTimeout(() => timeout(lightsync.pid), 7500);
     });
 }
