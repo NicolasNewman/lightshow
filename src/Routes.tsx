@@ -10,12 +10,19 @@ import IpcInterface from './classes/IpcInterface';
 import sizes from './constants/sizes';
 import LightSync from './classes/LightSync';
 
-export default class Routes extends Component {
+interface IProps {
+    monitors: string[];
+}
+
+export default class Routes extends Component<IProps> {
+    props: IProps;
+
     private dataStore: DataStore = new DataStore();
 
     private lightsync: LightSync = new LightSync();
 
     render() {
+        const { monitors } = this.props;
         return (
             <App>
                 <Switch>
@@ -30,6 +37,7 @@ export default class Routes extends Component {
                                 <HomePage
                                     dataStore={this.dataStore}
                                     lightsync={this.lightsync}
+                                    monitors={monitors}
                                 />
                             );
                         }}

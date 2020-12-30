@@ -8,15 +8,16 @@ import Routes from '../Routes';
 type Props = {
     store: any;
     history: History<any>;
+    monitors: string[];
 };
 
 export default class Root extends PureComponent<Props> {
     render() {
-        const { store, history } = this.props;
+        const { store, history, monitors } = this.props;
         return (
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <Routes />
+                    <Routes monitors={monitors} />
                 </ConnectedRouter>
             </Provider>
         );

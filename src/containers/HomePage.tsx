@@ -10,6 +10,7 @@ function mapStateToProps(state, ownProps) {
     return {
         dataStore: ownProps.dataStore,
         lightsync: ownProps.lightsync,
+        monitors: ownProps.monitors,
         // integrations
         integrationManager: state.integrations.manager,
         activeIntegrations: state.integrations.activeIntegrations,

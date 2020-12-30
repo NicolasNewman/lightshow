@@ -18,6 +18,7 @@ const { TabPane } = Tabs;
 interface IProps extends RouteComponentProps<any> {
     dataStore: DataStore;
     lightsync: LightSync;
+    monitors: string[];
     // integrations props
     integrationManager: IntegrationManager;
     activeIntegrations: Integration[];
@@ -61,6 +62,7 @@ export default class Home extends Component<IProps> {
         const {
             dataStore,
             lightsync,
+            monitors,
             integrationManager,
             activeIntegrations,
             lightSyncRunning,
@@ -92,7 +94,7 @@ export default class Home extends Component<IProps> {
                         />
                     </TabPane>
                     <TabPane tab="Settings" key="settings">
-                        <Settings dataStore={dataStore} />
+                        <Settings dataStore={dataStore} monitors={monitors} />
                     </TabPane>
                 </Tabs>
             </div>
