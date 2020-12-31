@@ -86,7 +86,7 @@ export default class Settings extends PureComponent<IProps> {
                                 --shrinkframesize&nbsp;
                                 <Tooltip
                                     placement="bottom"
-                                    title="Scaling factor for the resolution of the screen capture. Smaller images process faster, but have worse accuracy"
+                                    title="Scaling factor for the resolution of the screen capture. Smaller images (decrease the values) process faster, but have worse accuracy. Default 100"
                                 >
                                     <QuestionCircleOutlined />
                                 </Tooltip>

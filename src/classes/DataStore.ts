@@ -1,18 +1,17 @@
 import * as Store from 'electron-store';
 
+export type DataStoreKeys = 'shrinkframesize' | 'monitor' | 'visualize';
+
 /**
  * Wrapper for electron-store\'s Store object
  */
-
-export type DataStoreKeys = 'shrinkframesize' | 'monitor' | 'visualize';
-
 export default class DataStore {
     private store;
 
     private schema;
 
     /**
-     * Creates the data schema and initializes it
+     * Creates the data schema and initializes the store
      * @constructor
      */
     constructor() {

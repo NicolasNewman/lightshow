@@ -8,47 +8,70 @@ import LightSync from '../classes/LightSync';
 interface IProps {
     dataStore: DataStore;
     lightsync: LightSync;
-    lightSyncRunning: boolean;
-    lightSyncArgs: string[];
-    start: (lightsync: LightSync) => void;
-    stop: (lightsync: LightSync) => void;
+    // lightSyncRunning: boolean;
+    // lightSyncArgs: string[];
+    // start: (lightsync: LightSync) => void;
+    // stop: (lightsync: LightSync) => void;
 }
 
-export default class Launcher extends Component<IProps> {
+interface IState {
+    running: boolean;
+}
+
+export default class Launcher extends Component<IProps, IState> {
     props: IProps;
 
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            running: false,
+        };
+    }
+
+    private buildArgs = () => {
+        const { dataStore } = this.props;
+        const shrinkframesize = dataStore.get('shrinkframesize');
+        const monitor = dataStore.get('monitor');
+        const visualize = dataStore.get('visualize');
+        // return [
+        //     `-z ${shrinkframesize}`,
+        //     `-mon ${monitor}`,
+        //     `-vis ${visualize}`,
+        // ];
+        return ['-z', shrinkframesize, '-mon', monitor, '-vis', visualize];
+    };
 
     render() {
         const {
             lightsync,
-            lightSyncRunning,
-            lightSyncArgs,
-            start,
-            stop,
+            // lightSyncRunning,
+            // lightSyncArgs,
+            // start,
+            // stop,
         } = this.props;
+        const { running } = this.state;
         return (
             <div>
                 <Button
                     type="primary"
                     onClick={() => {
-                        if (!lightSyncRunning) {
-                            // lightsync.start(['-vis', 'true']);
-                            start(lightsync);
+                        if (!lightsync.getIsRunning()) {
+                            lightsync.start(this.buildArgs());
+                            this.setState({ running: true });
+                            // start(lightsync);
                         } else {
-                            // lightsync.stop();
-                            stop(lightsync);
+                            lightsync.stop();
+                            this.setState({ running: false });
+                            // stop(lightsync);
                         }
                     }}
                     style={
-                        lightSyncRunning
+                        running
                             ? { backgroundColor: '#F93154' }
                             : { backgroundColor: '#00B74A' }
                     }
                 >
-                    {lightSyncRunning ? 'Stop' : 'Start'}
+                    {running ? 'Stop' : 'Start'}
                 </Button>
             </div>
         );

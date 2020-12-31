@@ -25,11 +25,11 @@ interface IProps extends RouteComponentProps<any> {
     initialized: boolean;
     initialize: () => void;
     // lightsync props
-    lightSyncRunning: boolean;
-    lightSyncArgs: string[];
-    start: (lightsync: LightSync) => void;
-    stop: (lightsync: LightSync) => void;
-    setArgs: (args: string[]) => void;
+    // lightSyncRunning: boolean;
+    // lightSyncArgs: string[];
+    // start: (lightsync: LightSync) => void;
+    // stop: (lightsync: LightSync) => void;
+    // setArgs: (args: string[]) => void;
 }
 
 export default class Home extends Component<IProps> {
@@ -65,10 +65,10 @@ export default class Home extends Component<IProps> {
             monitors,
             integrationManager,
             activeIntegrations,
-            lightSyncRunning,
-            lightSyncArgs,
-            start,
-            stop,
+            // lightSyncRunning,
+            // lightSyncArgs,
+            // start,
+            // stop,
         } = this.props;
         // if (this.state.toHome) {
         //     return <Redirect to="/home" />;
@@ -80,10 +80,10 @@ export default class Home extends Component<IProps> {
                         <Launcher
                             dataStore={dataStore}
                             lightsync={lightsync}
-                            lightSyncRunning={lightSyncRunning}
-                            lightSyncArgs={lightSyncArgs}
-                            start={start}
-                            stop={stop}
+                            // lightSyncRunning={lightSyncRunning}
+                            // lightSyncArgs={lightSyncArgs}
+                            // start={start}
+                            // stop={stop}
                         />
                     </TabPane>
                     <TabPane tab="Integration" key="integration">

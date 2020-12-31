@@ -79,4 +79,8 @@ export default class LightSync {
     getColor() {
         return this.color;
     }
+
+    getIsRunning() {
+        return this.isRunning;
+    }
 }

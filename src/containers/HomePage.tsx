@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Home from '../components/Home';
 import IntegrationActions from '../actions/integrations';
-import LightSyncActions from '../actions/lightsync';
+// import LightSyncActions from '../actions/lightsync';
 
 function mapStateToProps(state, ownProps) {
     console.log(state);
@@ -16,14 +16,15 @@ function mapStateToProps(state, ownProps) {
         activeIntegrations: state.integrations.activeIntegrations,
         initialized: state.integrations.initialized,
         // lightsync
-        lightSyncRunning: state.lightsync.running,
-        lightSyncArgs: state.lightsync.args,
+        // lightSyncRunning: state.lightsync.running,
+        // lightSyncArgs: state.lightsync.args,
     };
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
     return bindActionCreators(
-        { ...IntegrationActions, ...LightSyncActions },
+        { ...IntegrationActions },
+        // { ...IntegrationActions, ...LightSyncActions },
         dispatch
     );
 }
