@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from 'react-router';
 import routes from './constants/routes';
 import App from './containers/App';
 import HomePage from './containers/HomePage';
-// import CounterPage from './containers/CounterPage';
 import DataStore from './classes/DataStore';
 import IpcInterface from './classes/IpcInterface';
 import sizes from './constants/sizes';
