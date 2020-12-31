@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 import { List } from 'antd';
-import DataStore from 'app/classes/DataStore';
+import DataStore from '../classes/DataStore';
 import IntigrationManager from '../integrations/IntegrationManager';
 import { Integration } from '../integrations/AbstractIntegration';
 

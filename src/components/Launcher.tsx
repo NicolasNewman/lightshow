@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { Button } from 'antd';
-import DataStore from 'app/classes/DataStore';
+import DataStore from '../classes/DataStore';
 import LightSync from '../classes/LightSync';
 
 interface IProps {

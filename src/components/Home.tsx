@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Tabs } from 'antd';
 // import { Redirect } from 'react-router';
-import DataStore from 'app/classes/DataStore';
+import DataStore from '../classes/DataStore';
 import Launcher from './Launcher';
 import Integrations from './Integrations';
 import Settings from './Settings';
